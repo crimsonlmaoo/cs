@@ -13,10 +13,16 @@
     <meta property="og:image" content="https://i.imgur.com/zGhP5YA.png" />
     <meta property="og:url" content="https://crimsonlmaoo.github.io/cs/" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="crimson's tools - Tools | crimson.cs" />
+    <meta
+      property="og:site_name"
+      content="crimson's tools - Tools | crimson.cs"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="crimson's tools - Tools | crimson.cs" />
-    <meta name="twitter:description" content="crimson's old stuff + tools | old stuff soon..." />
+    <meta
+      name="twitter:description"
+      content="crimson's old stuff + tools | old stuff soon..."
+    />
     <meta name="twitter:image" content="https://i.imgur.com/zGhP5YA.png" />
     <style>
       body {
@@ -165,7 +171,7 @@
         color: rgba(255, 0, 0, 0.9);
         margin-bottom: 40px;
       }
-        .mparticle {
+      .mparticle {
         position: absolute;
         font-size: 10px;
         color: blue;
@@ -183,11 +189,59 @@
         user-select: none;
         transition: transform 20s linear, opacity 20s linear;
       }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        backdrop-filter: blur(0px);
+        padding: 10px 20px;
+        color: white;
+        height: 60px;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .gif {
+        width: 105px;
+        height: auto;
+        object-fit: contain;
+      }
+
+      .mute-button img {
+        width: 25px;
+        height: auto;
+        transition: opacity 0.3s;
+      }
+      .mute-button {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: none;
+        border: 5px solid transparent;
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 10px;
+        transition: transform 0.3s;
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+      }
     </style>
   </head>
   <body>
+    <audio id="backgroundAudio" autoplay loop>
+      <source src="fid.mp3" type="audio/mpeg" />
+    </audio>
+    <button id="muteButton" class="mute-button">
+      <img
+        id="muteIcon"
+        src="https://img.icons8.com/ios-filled/50/ffffff/speaker.png"
+        alt="Unmute"
+      />
+    </button>
     <h1 class="xtra">crimson's stuff</h1>
-
+    <div class="topbar">
+      <img src="https://i.imgur.com/FvxpRL4.gif" alt="GIF" class="gif" />
+    </div>
     <div class="parent-container">
       <div
         class="container"
@@ -261,63 +315,73 @@
           "perspective(500px) rotateX(0deg) rotateY(0deg)";
       }
 
-    let particleDelay = 45;
-    let lastMouseMoveTime = 0;
+      let particleDelay = 45;
+      let lastMouseMoveTime = 0;
 
-    document.addEventListener("mousemove", (event) => {
-      const currentTime = Date.now();
-      if (currentTime - lastMouseMoveTime > particleDelay) {
-        createParticle(event.clientX, event.clientY + 2);
-        lastMouseMoveTime = currentTime;
+      document.addEventListener("mousemove", (event) => {
+        const currentTime = Date.now();
+        if (currentTime - lastMouseMoveTime > particleDelay) {
+          createParticle(event.clientX, event.clientY + 2);
+          lastMouseMoveTime = currentTime;
+        }
+      });
+
+      function createParticle(x, y) {
+        const particle = document.createElement("div");
+        particle.className = "mparticle";
+        particle.textContent = "❄️";
+        document.body.appendChild(particle);
+
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+
+        const horizontalMovement = (Math.random() - 0.5) * 725;
+        const fallDistance = window.innerHeight - y;
+
+        setTimeout(() => {
+          particle.style.transform = `translate(${horizontalMovement}px, ${
+            window.innerHeight - 50
+          }px)`;
+          particle.style.opacity = 0;
+        }, 0);
+
+        setTimeout(() => {
+          particle.remove();
+        }, 3000);
       }
-    });
-      
-    function createParticle(x, y) {
-      const particle = document.createElement("div");
-      particle.className = "mparticle";
-      particle.textContent = "❄️";
-      document.body.appendChild(particle);
-
-      particle.style.left = `${x}px`;
-      particle.style.top = `${y}px`;
-
-      const horizontalMovement = (Math.random() - 0.5) * 725;
-      const fallDistance = window.innerHeight - y;
-
-      setTimeout(() => {
-        particle.style.transform = `translate(${horizontalMovement}px, ${
-          window.innerHeight - 50
-        }px)`;
-        particle.style.opacity = 0;
-      }, 0);
-
-      setTimeout(() => {
-        particle.remove();
-      }, 3000);
-    }
       function frigginparticleyo() {
-      const particle = document.createElement("div");
-      particle.className = "particle";
-      particle.textContent = "❄️";
-      document.body.appendChild(particle);
+        const particle = document.createElement("div");
+        particle.className = "particle";
+        particle.textContent = "❄️";
+        document.body.appendChild(particle);
 
-      const xPosition = Math.random() * window.innerWidth;
-      particle.style.left = `${xPosition}px`;
-      particle.style.top = `0px`;
+        const xPosition = Math.random() * window.innerWidth;
+        particle.style.left = `${xPosition}px`;
+        particle.style.top = `0px`;
 
-      const horizontalMovement = (Math.random() - 0.5) * 1000;
-      const fallDuration = 20;
+        const horizontalMovement = (Math.random() - 0.5) * 1000;
+        const fallDuration = 20;
 
-      setTimeout(() => {
-        particle.style.transform = `translate(${horizontalMovement}px, ${window.innerHeight}px)`;
-      }, 0);
+        setTimeout(() => {
+          particle.style.transform = `translate(${horizontalMovement}px, ${window.innerHeight}px)`;
+        }, 0);
 
-      setTimeout(() => {
-        particle.remove();
-      }, fallDuration * 1000);
-    }
+        setTimeout(() => {
+          particle.remove();
+        }, fallDuration * 1000);
+      }
 
-    setInterval(frigginparticleyo, 100);
+      setInterval(frigginparticleyo, 100);
+      const audio = document.getElementById("backgroundAudio");
+      const muteButton = document.getElementById("muteButton");
+      const muteIcon = document.getElementById("muteIcon");
+
+      muteButton.addEventListener("click", () => {
+        audio.muted = !audio.muted;
+        muteIcon.src = audio.muted
+          ? "https://img.icons8.com/ios-filled/50/ffffff/mute.png"
+          : "https://img.icons8.com/ios-filled/50/ffffff/speaker.png";
+      });
     </script>
   </body>
 </html>
