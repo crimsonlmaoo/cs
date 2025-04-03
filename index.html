@@ -232,6 +232,41 @@
         container.style.transform =
           "perspective(500px) rotateX(0deg) rotateY(0deg)";
       }
+
+    let particleDelay = 45;
+    let lastMouseMoveTime = 0;
+
+    document.addEventListener("mousemove", (event) => {
+      const currentTime = Date.now();
+      if (currentTime - lastMouseMoveTime > particleDelay) {
+        createParticle(event.clientX, event.clientY + 2);
+        lastMouseMoveTime = currentTime;
+      }
+    });
+      
+    function createParticle(x, y) {
+      const particle = document.createElement("div");
+      particle.className = "mparticle";
+      particle.textContent = "❄️";
+      document.body.appendChild(particle);
+
+      particle.style.left = `${x}px`;
+      particle.style.top = `${y}px`;
+
+      const horizontalMovement = (Math.random() - 0.5) * 725;
+      const fallDistance = window.innerHeight - y;
+
+      setTimeout(() => {
+        particle.style.transform = `translate(${horizontalMovement}px, ${
+          window.innerHeight - 50
+        }px)`;
+        particle.style.opacity = 0;
+      }, 0);
+
+      setTimeout(() => {
+        particle.remove();
+      }, 3000);
+    }
     </script>
   </body>
 </html>
