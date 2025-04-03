@@ -8,6 +8,16 @@
       href="https://fonts.googleapis.com/css2?family=Lexend:wght@700&display=swap"
       rel="stylesheet"
     />
+    <meta property="og:title" content="crimson's tools - Tools | crimson.cs" />
+    <meta property="og:description" content="crimson's old stuff + tools" />
+    <meta property="og:image" content="https://i.imgur.com/zGhP5YA.png" />
+    <meta property="og:url" content="https://crimsonlmaoo.github.io/cs/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="crimson's tools - Tools | crimson.cs" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="crimson's tools - Tools | crimson.cs" />
+    <meta name="twitter:description" content="crimson's old stuff + tools | old stuff soon..." />
+    <meta name="twitter:image" content="https://i.imgur.com/zGhP5YA.png" />
     <style>
       body {
         display: flex;
@@ -155,6 +165,24 @@
         color: rgba(255, 0, 0, 0.9);
         margin-bottom: 40px;
       }
+        .mparticle {
+        position: absolute;
+        font-size: 10px;
+        color: blue;
+        pointer-events: none;
+        user-select: none;
+        opacity: 1;
+        transition: transform 3s linear, opacity 3s linear;
+      }
+
+      .particle {
+        position: absolute;
+        font-size: 9px;
+        color: blue;
+        pointer-events: none;
+        user-select: none;
+        transition: transform 20s linear, opacity 20s linear;
+      }
     </style>
   </head>
   <body>
@@ -267,6 +295,29 @@
         particle.remove();
       }, 3000);
     }
+      function frigginparticleyo() {
+      const particle = document.createElement("div");
+      particle.className = "particle";
+      particle.textContent = "❄️";
+      document.body.appendChild(particle);
+
+      const xPosition = Math.random() * window.innerWidth;
+      particle.style.left = `${xPosition}px`;
+      particle.style.top = `0px`;
+
+      const horizontalMovement = (Math.random() - 0.5) * 1000;
+      const fallDuration = 20;
+
+      setTimeout(() => {
+        particle.style.transform = `translate(${horizontalMovement}px, ${window.innerHeight}px)`;
+      }, 0);
+
+      setTimeout(() => {
+        particle.remove();
+      }, fallDuration * 1000);
+    }
+
+    setInterval(frigginparticleyo, 100);
     </script>
   </body>
 </html>
